@@ -2,24 +2,78 @@ package it.polito.tdp.corsi;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.corsi.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
-public class FXMLController implements Initializable {
-    
+public class FXMLController {
+	
+	private Model model; 
+
     @FXML
-    private Label label;
-    
+    private ResourceBundle resources;
+
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private URL location;
+
+    @FXML
+    private TextField Periodotxt;
+
+    @FXML
+    private TextField Corsotxt;
+
+    @FXML
+    private Button CorsiperPeriodobtn;
+
+    @FXML
+    private Button Studentibtn;
+
+    @FXML
+    private Button NumeroStudentibtn;
+
+    @FXML
+    private Button DisivioneStudentibtn;
+
+    @FXML
+    private TextArea Resulttxt;
+
+    @FXML
+    void handleCorsiperPeriodo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleStampaDivisione(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleStampaNumeroStudenti(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleStampaStudenti(ActionEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        assert Periodotxt != null : "fx:id=\"Periodotxt\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+        assert Corsotxt != null : "fx:id=\"Corsotxt\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+        assert CorsiperPeriodobtn != null : "fx:id=\"CorsiperPeriodobtn\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+        assert Studentibtn != null : "fx:id=\"Studentibtn\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+        assert NumeroStudentibtn != null : "fx:id=\"NumeroStudentibtn\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+        assert DisivioneStudentibtn != null : "fx:id=\"DisivioneStudentibtn\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+        assert Resulttxt != null : "fx:id=\"Resulttxt\" was not injected: check your FXML file 'Gestore corsi.fxml'.";
+
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void setModel(Model model) {
+    	this.model= model; 
+    }
 }
