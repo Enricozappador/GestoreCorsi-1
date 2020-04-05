@@ -78,7 +78,22 @@ public class FXMLController {
 
     @FXML
     void handleStampaDivisione(ActionEvent event) {
-
+    	Resulttxt.clear();
+Resulttxt.clear();
+    	
+    	String codins = Corsotxt.getText(); 
+    	
+    	if(!this.model.esisteCorso(codins)) {
+    		Resulttxt.appendText("il corso non esite!");
+    		return; 
+    	}
+// dato il nome di un corso elenco le facoltà e il numero di persone ad esso corrispondenti
+    	
+    	Map<String,Integer> stat = this.model.getDivisioneCDS(new Corso(codins,null,null,null)); 
+    	
+    	for(String cds : stat.keySet()) {
+    		Resulttxt.appendText(cds+" "+stat.get(cds)+ "\n");
+    	}
     }
 
     @FXML

@@ -118,6 +118,8 @@ public class CorsoDAO {
 			studenti.add(s); 
 		}
 		
+		conn.close();
+		
 	}catch(SQLException e) {
 		throw new RuntimeException(e); 
 	}
@@ -125,6 +127,31 @@ public class CorsoDAO {
 	
 	
 	
+	}
+	
+	
+	public Map<String, Integer> getDivisioneCDS(Corso c){
+		
+		String sql=" select c.CDS, COUNT(*) as tot from studente as s, iscrizione as i "
+				+ "where s.matricola = i.matricola and s.cds<> \"\" and i.codins = ? group by s.CDS ";
+				
+		Map<String, Integer> statistiche = new HashMap<String, Integer>();
+		try { 
+			Connection conn = ConnectDB.getConnection(); 
+			PreparedStatement st= conn.prepareStatement(sql); 
+			st.setString(1, c.getCodins());
+			ResultSet rs = st.executeQuery(); 
+			
+			while(rs.next()) {
+				statistiche.put(rs.getString("CDS"), rs.getInt("tot") );
+			}
+			
+			conn.close();
+			
+		}catch(SQLException e) {
+			throw new RuntimeException(e); 
+		}
+		return statistiche;
 	}
 
 }
