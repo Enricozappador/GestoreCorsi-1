@@ -7,7 +7,7 @@ public class Corso {
 	private String nome; 
 	private Integer pd; 
 	
-	public Corso(String codins, Integer crediti, String nome, Integer ps) {
+	public Corso(String codins, Integer crediti, String nome, Integer pd) {
 		
 		this.codins = codins; 
 		this.crediti = crediti; 

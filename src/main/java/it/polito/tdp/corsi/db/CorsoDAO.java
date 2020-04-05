@@ -5,11 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import it.polito.tdp.corsi.model.Corso;
 
 public class CorsoDAO {
+	
+	// select c.codins, c.nome, c.crediti, c.pd, COUNT(*) as tot from corso as c, iscrizione as i where c.pd =  and c.codins = i.codins
+	//gtoup by c.codins, c.nome, c.crediti, c.pd
 	
 	public List<Corso> getCorsibyPeriodo(Integer pd){
 		String sql = "SELECT * FROM corso WHERE pd = ?"; 
@@ -33,6 +38,35 @@ public class CorsoDAO {
 		}
 		
 		return result; 
+		
+	}
+	
+	public Map<Corso, Integer> getIscrittibyPeriodo(Integer pd){
+		
+		String sql = "select c.codins, c.nome, c.crediti, c.pd, "
+				+ "COUNT(*) as tot from corso as c, iscrizione as i where c.pd "
+				+ "= ? and c.codins = i.codins group by c.codins, c.nome, c.crediti, c.pd"; 
+		
+		Map<Corso, Integer> result = new HashMap<Corso, Integer>(); 
+				
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql); 
+			st.setInt(1, pd);
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+			 Corso c = new Corso (rs.getString("codins"), rs.getInt("crediti"), rs.getString("nome"), rs.getInt("pd")); 
+			 Integer n = rs.getInt("tot"); 
+			 result.put(c, n); 
+			}
+			
+			conn.close();
+			
+		}catch(SQLException e) {
+			throw new RuntimeException(e); 
+		}
+		return result;
 		
 	}
 

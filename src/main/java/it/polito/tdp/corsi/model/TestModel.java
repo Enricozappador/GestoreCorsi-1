@@ -6,6 +6,9 @@ public class TestModel {
 		Model model = new Model(); 
 		
 		System.out.println(model.getCorsibyPeriodo(1));
+		
+		
+		System.out.println(model.getIscrittibyPeriodo(1));
 	}
 
 }

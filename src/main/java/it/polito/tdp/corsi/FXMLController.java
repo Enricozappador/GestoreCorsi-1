@@ -1,8 +1,11 @@
 package it.polito.tdp.corsi;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +46,33 @@ public class FXMLController {
 
     @FXML
     void handleCorsiperPeriodo(ActionEvent event) {
-
+    	
+    	Resulttxt.clear();
+    	
+    	String pdString = Periodotxt.getText(); 
+    	Integer pd; 
+    	
+    	try {
+    	pd = Integer.parseInt(pdString); 
+    	} catch (NumberFormatException e) {
+    		Resulttxt.appendText("Devi inserire un numero!");
+    		return; 
+    	}
+    	
+    	
+    	if(!pd.equals(1) && !pd.equals(2)) {
+    		Resulttxt.appendText("Devi inserire un numero compreso tra 0  e 2");
+    		return; 
+    	}
+    	
+    	
+    	List<Corso> corsi = this.model.getCorsibyPeriodo(pd); 
+    	
+    	for(Corso c : corsi) {
+    		Resulttxt.appendText(c.toString()+ "\n");
+    	}
+    	
+    	
     }
 
     @FXML
@@ -53,6 +82,30 @@ public class FXMLController {
 
     @FXML
     void handleStampaNumeroStudenti(ActionEvent event) {
+Resulttxt.clear();
+    	
+    	String pdString = Periodotxt.getText(); 
+    	Integer pd; 
+    	
+    	try {
+    	pd = Integer.parseInt(pdString); 
+    	} catch (NumberFormatException e) {
+    		Resulttxt.appendText("Devi inserire un numero!");
+    		return; 
+    	}
+    	
+    	
+    	if(!pd.equals(1) && !pd.equals(2)) {
+    		Resulttxt.appendText("Devi inserire un numero compreso tra 0  e 2");
+    		return; 
+    	}
+    	
+    	Map<Corso, Integer> statistiche = this.model.getIscrittibyPeriodo(pd); 
+    	
+    	for(Corso c : statistiche.keySet()) {
+    		Resulttxt.appendText(c.getNome() + " "+ statistiche.get(c)+ "\n");
+    		
+    	}
 
     }
 
