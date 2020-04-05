@@ -23,6 +23,15 @@ public class Model {
 		return dao.getIscrittibyPeriodo(pd); 
 	}
 	
+	public List<Studente> getStudentibyCorso(Corso c){
+		return dao.getStudentibyCorso(c); 
+	}
+	
+	public boolean esisteCorso(String codins) {
+		
+		return dao.esisteCorso(codins); 
+		
+	}
 	
 
 }

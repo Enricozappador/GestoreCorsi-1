@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
+import it.polito.tdp.corsi.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -111,6 +112,27 @@ Resulttxt.clear();
 
     @FXML
     void handleStampaStudenti(ActionEvent event) {
+    	
+    	Resulttxt.clear();
+    	
+    	String codins = Corsotxt.getText(); 
+    	
+    	if(!this.model.esisteCorso(codins)) {
+    		Resulttxt.appendText("il corso non esite!");
+    		return; 
+    	}
+    	
+    	List<Studente> studenti= this.model.getStudentibyCorso(new Corso(codins, null, null, null)); 
+    	
+    	if(studenti.size()==0) {
+    		Resulttxt.appendText("Il corso non ha studenti iscritti");
+    		return; 
+    	
+    	}
+    	
+    	for(Studente s : studenti) {
+    		Resulttxt.appendText(s.toString()+"\n");
+    	}
 
     }
 
